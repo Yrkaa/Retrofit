@@ -12,20 +12,15 @@ public class Main {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Controller controller = retrofit.create(Controller.class);
-                try {
-                    Response<POJO> response = controller.getJoke().execute();
-                    System.out.println(response.body().getSetup() + " " + response.body().getPunchline());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-
-        t.start();
+        Controller controller = retrofit.create(Controller.class);
+        try {
+            Response<POJO> response = controller.getJoke().execute();
+            System.out.println(response.body().getSetup() + " " + response.body().getPunchline());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
+
+
